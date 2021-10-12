@@ -5,4 +5,4 @@ wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.0.0/f
     tar xz && sudo ln -s `pwd`/flyway-8.0.0/flyway /usr/local/bin
 echo "flyway successfully installed"
 
-flyway -url=jdbc:postgresql://$1 -user=$2 -password=$3 migrate
+flyway -url=jdbc:postgresql://$RDS_URL -user=$RDS_USER -password=$RDS_PASSWORD migrate

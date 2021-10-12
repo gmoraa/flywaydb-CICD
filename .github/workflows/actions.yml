@@ -12,4 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run database migrations
-        run: ./migration.sh ${{ secrets.RDS_URL }} ${{ secrets.RDS_USER }} ${{ secrets.RDS_PASSWORD }}
+        run: ./migration.sh
+        env:
+          RDS_URL: ${{ secrets.RDS_URL }}
+          RDS_USER: ${{ secrets.RDS_USER }}
+          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
