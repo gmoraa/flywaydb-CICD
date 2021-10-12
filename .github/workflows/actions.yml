@@ -11,5 +11,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install flyway
+        run: wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.0.0/flyway-commandline-8.0.0-linux-x64.tar.gz | tar xz && sudo ln -s `pwd`/flyway-8.0.0/flyway /usr/local/bin
       - name: Run database migrations
-        run: ./migration.sh ${{ secrets.RDS_URL }} ${{ secrets.RDS_USER }} ${{ secrets.RDS_PASSWORD }}
+        run: flyway -url=jdbc:postgresql://${{ secrets.RDS_URL }} -user=${{ secrets.RDS_USER }} -password=${{ secrets.RDS_PASSWORD }} migrate
+      #- name: Run database migrations
+      #  run: ./migration.sh ${{ secrets.RDS_URL }} ${{ secrets.RDS_USER }} ${{ secrets.RDS_PASSWORD }}
