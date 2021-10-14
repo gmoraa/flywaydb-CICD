@@ -16,8 +16,8 @@ jobs:
       - name: Run validation
         run: ./test.sh
       - name: Run database migrations
-        run: flyway -url=jdbc:postgresql://$RDS_URL -user=$RDS_USER -password=$RDS_PASSWORD migrate
+        run: flyway migrate
         env:
-          RDS_URL: ${{ secrets.RDS_URL }}
-          RDS_USER: ${{ secrets.RDS_USER }}
-          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
+          FLYWAY_URL: jdbc:postgresql://${{ secrets.RDS_URL }}
+          FLYWAY_USER: ${{ secrets.RDS_USER }}
+          FLYWAY_PASSWORD: ${{ secrets.RDS_PASSWORD }}
