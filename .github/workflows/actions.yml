@@ -3,6 +3,8 @@ name: CICD
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   run_migration_test:
@@ -16,6 +18,7 @@ jobs:
       - name: Run validation
         run: ./test.sh
       - name: Run database migrations
+        if: github.event_name == 'push'
         run: flyway migrate
         env:
           FLYWAY_URL: jdbc:postgresql://${{ secrets.RDS_URL }}
